@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import QPixmap
 from included import *
 from lcgLemer import *
@@ -79,8 +79,6 @@ class Ui_Dialog(object):
         pixmap = QPixmap(file_name)
 
         self.label_3.setPixmap(pixmap.scaledToWidth(576))
-
-        #self.graphicsView.resize(pixmap.width(), pixmap.height())
 
     def click1(self):
         elements = int(self.lineEdit.text())
