@@ -2,18 +2,27 @@ import matplotlib.pyplot as plt
 import random
 
 
-def included():
-    n = 10
-    x = range(n)
-    y = [random.uniform(0, 1) for _ in range(n)]
+def included(a, b):
+    n = int(a/b)
+    s = list(range(b))
+    def avg(min, max, count):
+        res = 0
+        for i in range(count):
+            if i == 0:
+                i = 1
+            res += random.uniform(min, max)
+            return res/i
+    y = [avg(0, 1, n) for _ in range(b)]
     fig, ax = plt.subplots()
-    plt.bar(x, y)
+    plt.bar(s, y)
 
     plt.xlabel('x')
     plt.ylabel('y')
 
-    plt.title('Генерация случайных чисел на интервале')
+    plt.title('Метод случайных чисел на интервале')
 
     plt.show()
     fig.savefig('мой график.png')
+
+
 

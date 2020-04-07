@@ -8,14 +8,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtGui import QPixmap
+from included import *
+from lcgLemer import *
+from simple_lcg import *
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(616, 551)
+        Dialog.resize(616, 700)
         self.tabWidget = QtWidgets.QTabWidget(Dialog)
-        self.tabWidget.setGeometry(QtCore.QRect(10, 20, 601, 521))
+        self.tabWidget.setGeometry(QtCore.QRect(10, 20, 601, 670))
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
@@ -58,28 +61,50 @@ class Ui_Dialog(object):
         self.lineEdit_2 = QtWidgets.QLineEdit(self.verticalLayoutWidget_3)
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.verticalLayout_3.addWidget(self.lineEdit_2)
-        self.graphicsView = QtWidgets.QGraphicsView(self.tab)
-        self.graphicsView.setGeometry(QtCore.QRect(80, 230, 431, 231))
-        self.graphicsView.setObjectName("graphicsView")
         self.pushButton = QtWidgets.QPushButton(self.tab)
         self.pushButton.setGeometry(QtCore.QRect(240, 170, 111, 41))
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.click1)
+        self.label_3 = QtWidgets.QLabel(self.tab)
+        self.label_3.setGeometry(QtCore.QRect(10, 229, 554, 408))
+        self.label_3.setText("")
+        self.label_3.setObjectName("label_3")
         self.tabWidget.addTab(self.tab, "")
 
         self.retranslateUi(Dialog)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+    def load_image(self, file_name):
+        pixmap = QPixmap(file_name)
+
+        self.label_3.setPixmap(pixmap.scaledToWidth(576))
+
+        #self.graphicsView.resize(pixmap.width(), pixmap.height())
+
+    def click1(self):
+        elements = int(self.lineEdit.text())
+        intervals = int(self.lineEdit_2.text())
+        if self.radioButton.isChecked():
+            included(elements, intervals)
+            self.load_image('мой график.png')
+        elif self.radioButton_2.isChecked():
+            simple_lcg(elements, intervals)
+            self.load_image('мой график.png')
+        elif self.radioButton_3.isChecked():
+            lemer_lcg(elements, intervals)
+            self.load_image('мой график.png')
+
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Сыпачёв А. ИДБ-17-07"))
         self.radioButton.setText(_translate("Dialog", "Встроенная функция генерации случайных чисел на интервале [0;1]"))
         self.radioButton_2.setText(_translate("Dialog", "Метод простых конгруэнций"))
         self.radioButton_3.setText(_translate("Dialog", "Метод линейной конгруэнтной последовательности Лемера Д.Г."))
         self.label.setText(_translate("Dialog", "Количество элементов"))
         self.label_2.setText(_translate("Dialog", "Количество интервалов"))
         self.pushButton.setText(_translate("Dialog", "Генерировать"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Dialog", "Tab 1"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Dialog", "Равномерное распределение"))
 
 
 if __name__ == "__main__":
