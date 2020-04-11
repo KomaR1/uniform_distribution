@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import time
+from static_function import getBin
 
 seed = time.time()
 
@@ -11,18 +12,14 @@ def lcg():
 
 
 def simple_lcg(a, b):
-    n = int(a/b)
-    s = list(range(b))
+    result_arr = [0 for i in range(b)]
+    for i in range(a):
+        result_arr[getBin(lcg() / (2 ** 32), binscount=b)] += 1
+    return result_arr
 
-    def avg(min, max, count):
-        res = 0
-        for i in range(count):
-            if i == 0:
-                i = 1
-            res += lcg()
-            print((res/i)/2**32)
-            return (res/i)/2**32
-    y = [avg(0, 1, n) for _ in range(b)]
+def draw_simple_lcg(a, b):
+    y = simple_lcg(a, b)
+    s = list(range(b))
     fig, ax = plt.subplots()
     plt.bar(s, y)
 

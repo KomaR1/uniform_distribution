@@ -153,13 +153,13 @@ class Ui_Dialog(object):
         elements = int(self.lineEdit.text())
         intervals = int(self.lineEdit_2.text())
         if self.radioButton.isChecked():
-            included(elements, intervals)
+            draw_included(elements, intervals)
             self.load_image('мой график.png')
         elif self.radioButton_2.isChecked():
-            simple_lcg(elements, intervals)
+            draw_simple_lcg(elements, intervals)
             self.load_image('мой график.png')
         elif self.radioButton_3.isChecked():
-            lemer_lcg(elements, intervals)
+            draw_lemer_lcg(elements, intervals)
             self.load_image('мой график.png')
 
     def retranslateUi(self, Dialog):

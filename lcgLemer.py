@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import time
+from static_function import getBin
 
-seed = time.time()
+seed = time.time() % 2**30
 
 
 def lcgL():
@@ -11,17 +12,15 @@ def lcgL():
 
 
 def lemer_lcg(a, b):
-    n = int(a/b)
-    s = list(range(b))
+    result_arr = [0 for i in range(b)]
+    for i in range(a):
+        result_arr[getBin(lcgL() / (2 ** 32), binscount=b)] += 1
+    return result_arr
 
-    def avg(min, max, count):
-        res = 0
-        for i in range(count):
-            if i == 0:
-                i = 1
-            res += lcgL()
-            return res/i/2**32
-    y = [avg(0, 1, n) for _ in range(b)]
+
+def draw_lemer_lcg(a, b):
+    y = lemer_lcg(a, b)
+    s = list(range(b))
     fig, ax = plt.subplots()
     plt.bar(s, y)
 
@@ -32,4 +31,3 @@ def lemer_lcg(a, b):
 
     plt.show()
     fig.savefig('мой график.png')
-
