@@ -1,12 +1,12 @@
 import matplotlib.pyplot as plt
 import random
-from static_function import getBin
+from static_function import get_bin
 
 
 def included(a, b):
     result_arr = [0 for i in range(b)]
     for i in range(a):
-        result_arr[getBin(random.uniform(0, 1), binscount=b)] += 1
+        result_arr[get_bin(random.uniform(0, 1), binscount=b)] += 1
     return result_arr
 
 

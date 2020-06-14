@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import time
-from static_function import getBin
+from static_function import get_bin
 
 seed = time.time()
 
@@ -14,8 +14,9 @@ def lcg():
 def simple_lcg(a, b):
     result_arr = [0 for i in range(b)]
     for i in range(a):
-        result_arr[getBin(lcg() / (2 ** 32), binscount=b)] += 1
+        result_arr[get_bin(lcg() / (2 ** 32), binscount=b)] += 1
     return result_arr
+
 
 def draw_simple_lcg(a, b):
     y = simple_lcg(a, b)
